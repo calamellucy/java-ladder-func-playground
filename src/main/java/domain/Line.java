@@ -12,5 +12,11 @@ public class Line {
         count = num;
     }
 
+    public List<Boolean> getPoints() {
+        return points;
+    }
 
+    public int getCount() {
+        return count;
+    }
 }
