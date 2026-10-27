@@ -5,7 +5,7 @@ import domain.Line;
 import java.util.List;
 
 public class OutputView {
-    public void printLadder(Ladder ladder, int row, int column) {
+    public static void printLadder(Ladder ladder, int row, int column) {
         System.out.println("실행결과\n");
         List<Line> lineList = ladder.getLines();
         for (int i = 0; i < row; i++) {
