@@ -8,8 +8,8 @@ public class Ladder {
 
     public Ladder(int row, int column) {
         lines = new ArrayList<>();
-        for (int i = 0; i < column; i++) {
-            Line line = new Line(row);
+        for (int i = 0; i < row; i++) {
+            Line line = new Line(column);
             lines.add(line);
         }
     }

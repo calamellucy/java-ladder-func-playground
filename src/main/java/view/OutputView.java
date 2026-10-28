@@ -9,7 +9,8 @@ public class OutputView {
         System.out.println("실행결과\n");
         List<Line> lineList = ladder.getLines();
         for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
+            System.out.print("     |");
+            for (int j = 0; j < column - 1; j++) {
                 if (lineList.get(i).getPoints().get(j)) {
                     System.out.print("-----|");
                     continue;
