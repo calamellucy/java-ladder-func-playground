@@ -7,17 +7,25 @@ import java.util.List;
 public class OutputView {
     public static void printLadder(Ladder ladder, int row, int column) {
         System.out.println("실행결과\n");
-        List<Line> lineList = ladder.getLines();
+        List<Line> lines = ladder.getLines();
         for (int i = 0; i < row; i++) {
-            System.out.print("     |");
-            for (int j = 0; j < column - 1; j++) {
-                if (lineList.get(i).getPoints().get(j)) {
-                    System.out.print("-----|");
-                    continue;
-                }
-                System.out.print("     |");
-            }
-            System.out.print("\n");
+            printLine(lines.get(i));
         }
+    }
+
+    private static void printLine(Line line) {
+        System.out.print("     |");
+        for (boolean point : line.getPoints()) {
+            printPoint(point);
+        }
+        System.out.println();
+    }
+
+    private static void printPoint(boolean point) {
+        if (point) {
+            System.out.print("-----|");
+            return;
+        }
+        System.out.print("     |");
     }
 }
