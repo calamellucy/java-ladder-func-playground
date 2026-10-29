@@ -14,7 +14,6 @@ public class OutputView {
     }
 
     private static void printLine(Line line) {
-        System.out.print("     |");
         for (boolean point : line.getPoints()) {
             printPoint(point);
         }
@@ -27,5 +26,12 @@ public class OutputView {
             return;
         }
         System.out.print("     |");
+    }
+
+    public static void printResult(List<Integer> resultList) {
+        System.out.println();
+        for (int i = 0; i < resultList.size(); i++) {
+            System.out.println(i + " -> " + resultList.get(i));
+        }
     }
 }
