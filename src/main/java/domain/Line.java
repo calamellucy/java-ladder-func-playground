@@ -12,7 +12,7 @@ public class Line {
     public Line(int columnNum) {
         validateCount(columnNum);
         points = new ArrayList<>();
-        initializePoints(columnNum - 1);
+        initializePoints(columnNum);
     }
 
     private void validateCount(int count) {
@@ -29,7 +29,7 @@ public class Line {
     }
 
     private boolean createPoint(int index) {
-        if (index == 0 || !points.get(index - 1)) {
+        if (index != 0 && !points.get(index - 1)) {
             return RANDOM.nextBoolean();
         }
         return false;

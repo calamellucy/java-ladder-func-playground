@@ -12,7 +12,7 @@ public class LineTest {
     void 세로줄_개수에_맞게_연결_위치가_생성된다() {
         Line line = new Line(4);
 
-        assertEquals(3, line.getPoints().size());
+        assertEquals(4, line.getPoints().size());
     }
 
     @Test
