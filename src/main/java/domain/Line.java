@@ -9,9 +9,17 @@ public class Line {
 
     private final List<Boolean> points;
 
-    public Line(int num) {
+    public Line(int columnNum) {
+        validateCount(columnNum);
         points = new ArrayList<>();
-        initializePoints(num - 1);
+        initializePoints(columnNum - 1);
+    }
+
+    private void validateCount(int count) {
+        if (count < Ladder.MIN_COLUMN_COUNT) {
+            throw new IllegalArgumentException("세로줄 개수는 " +
+                    Ladder.MIN_COLUMN_COUNT + " 이상이어야 합니다.");
+        }
     }
 
     private void initializePoints(int count) {
