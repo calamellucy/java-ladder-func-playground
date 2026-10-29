@@ -13,7 +13,7 @@ public class Controller {
         Ladder ladder = new Ladder(row, column);
         LadderGame ladderGame = new LadderGame(ladder);
         List<Integer> gameResult = ladderGame.getResult();
-        OutputView.printLadder(ladder, row, column);
+        OutputView.printLadder(ladder);
         OutputView.printResult(gameResult);
     }
 }

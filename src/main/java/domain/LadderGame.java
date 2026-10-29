@@ -40,13 +40,13 @@ public class LadderGame {
         if (position == 0) {
             return false;
         }
-        return ladder.isConnected(row, position - 1);
+        return ladder.isConnected(row, position - 1).isConnected();
     }
 
     private boolean canMoveRight(int row, int position) {
         if (position == ladder.getColumn() - 1) {
             return false;
         }
-        return ladder.isConnected(row, position);
+        return ladder.isConnected(row, position).isConnected();
     }
 }

@@ -7,12 +7,12 @@ import java.util.Random;
 public class Line {
     private static final Random RANDOM = new Random();
 
-    private final List<Boolean> points;
+    private final List<Connection> points;
 
     public Line(int columnNum) {
         validateCount(columnNum);
         points = new ArrayList<>();
-        initializePoints(columnNum);
+        initializePoints(columnNum - 1);
     }
 
     private void validateCount(int count) {
@@ -28,14 +28,21 @@ public class Line {
         }
     }
 
-    private boolean createPoint(int index) {
-        if (index != 0 && !points.get(index - 1)) {
-            return RANDOM.nextBoolean();
+    private Connection createPoint(int index) {
+        if (index == 0 || !points.get(index - 1).isConnected()) {
+            return createRandomConnection();
         }
-        return false;
+        return Connection.DISCONNECTED;
     }
 
-    public List<Boolean> getPoints() {
+    private Connection createRandomConnection() {
+        if (RANDOM.nextBoolean()) {
+            return Connection.CONNECTED;
+        }
+        return Connection.DISCONNECTED;
+    }
+
+    public List<Connection> getPoints() {
         return points;
     }
 

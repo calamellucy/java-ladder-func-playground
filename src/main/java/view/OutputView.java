@@ -1,27 +1,29 @@
 package view;
 
+import domain.Connection;
 import domain.Ladder;
 import domain.Line;
 import java.util.List;
 
 public class OutputView {
-    public static void printLadder(Ladder ladder, int row, int column) {
+    public static void printLadder(Ladder ladder) {
         System.out.println("실행결과\n");
         List<Line> lines = ladder.getLines();
-        for (int i = 0; i < row; i++) {
-            printLine(lines.get(i));
+        for (Line line : lines) {
+            printLine(line);
         }
     }
 
     private static void printLine(Line line) {
-        for (boolean point : line.getPoints()) {
+        System.out.print("    |");
+        for (Connection point : line.getPoints()) {
             printPoint(point);
         }
         System.out.println();
     }
 
-    private static void printPoint(boolean point) {
-        if (point) {
+    private static void printPoint(Connection point) {
+        if (point.isConnected()) {
             System.out.print("-----|");
             return;
         }
