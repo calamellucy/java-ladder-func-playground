@@ -10,13 +10,13 @@ import java.util.Set;
 public class GameResult {
     private final Map<Name, Result> results;
 
-    public GameResult(Names names, List<Integer> positions, List<Result> gameResults) {
+    public GameResult(Names names, List<Integer> positions, Results gameResults) {
         validateSize(names, positions, gameResults);
         results = new LinkedHashMap<>();
         initializeResults(names, positions, gameResults);
     }
 
-    private void validateSize(Names names, List<Integer> positions, List<Result> gameResults) {
+    private void validateSize(Names names, List<Integer> positions, Results gameResults) {
         if (names == null || positions == null || gameResults == null) {
             throw new IllegalArgumentException("결과 목록은 null일 수 없습니다.");
         }
@@ -25,7 +25,7 @@ public class GameResult {
         }
     }
 
-    private void initializeResults(Names names, List<Integer> positions, List<Result> gameResults) {
+    private void initializeResults(Names names, List<Integer> positions, Results gameResults) {
         for (int index = 0; index < names.size(); index++) {
             addResult(names.get(index), gameResults.get(positions.get(index)));
         }

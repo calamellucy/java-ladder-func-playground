@@ -8,6 +8,7 @@ import domain.LadderGenerator;
 import domain.Name;
 import domain.Names;
 import domain.Result;
+import domain.Results;
 import domain.RowCount;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +18,10 @@ import view.OutputView;
 public class Controller {
     public void run() {
         Names names = new Names(inputNameList(InputView.inputNames()));
-        List<Result> resultList = inputResultList(InputView.inputResults());
+        Results results = new Results(inputResultList(InputView.inputResults()));
         Ladder ladder = createLadder(names.size());
-        GameResult gameResult = createGameResult(ladder, names, resultList);
-        OutputView.printLadder(ladder, names.getNames(), resultList);
+        GameResult gameResult = createGameResult(ladder, names, results);
+        OutputView.printLadder(ladder, names.getNames(), results.getResults());
         printSelectedResult(gameResult);
     }
 
@@ -30,7 +31,7 @@ public class Controller {
         return new LadderGenerator().generate(row, column);
     }
 
-    private GameResult createGameResult(Ladder ladder, Names names, List<Result> results) {
+    private GameResult createGameResult(Ladder ladder, Names names, Results results) {
         LadderGame ladderGame = new LadderGame(ladder);
         List<Integer> positions = ladderGame.getResult();
         return new GameResult(names, positions, results);
