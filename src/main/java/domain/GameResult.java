@@ -8,24 +8,24 @@ import java.util.Map;
 public class GameResult {
     private final Map<Name, Result> results;
 
-    public GameResult(List<Name> nameList, List<Integer> intGameResult, List<Result> gameResult) {
-        validateSize(nameList, intGameResult, gameResult);
+    public GameResult(Names names, List<Integer> positions, List<Result> gameResults) {
+        validateSize(names, positions, gameResults);
         results = new LinkedHashMap<>();
-        initializeResults(nameList, intGameResult, gameResult);
+        initializeResults(names, positions, gameResults);
     }
 
-    private void validateSize(List<Name> names, List<Integer> positions, List<Result> results) {
-        if (names == null || positions == null || results == null) {
+    private void validateSize(Names names, List<Integer> positions, List<Result> gameResults) {
+        if (names == null || positions == null || gameResults == null) {
             throw new IllegalArgumentException("결과 목록은 null일 수 없습니다.");
         }
-        if (names.size() != positions.size() || names.size() != results.size()) {
+        if (names.size() != positions.size() || names.size() != gameResults.size()) {
             throw new IllegalArgumentException("이름과 결과의 개수가 일치해야 합니다.");
         }
     }
 
-    private void initializeResults(List<Name> names, List<Integer> positions, List<Result> results) {
+    private void initializeResults(Names names, List<Integer> positions, List<Result> gameResults) {
         for (int index = 0; index < names.size(); index++) {
-            addResult(names.get(index), results.get(positions.get(index)));
+            addResult(names.get(index), gameResults.get(positions.get(index)));
         }
     }
 
