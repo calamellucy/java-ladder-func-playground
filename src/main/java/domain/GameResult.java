@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class GameResult {
     private final Map<Name, Result> results;
@@ -30,7 +32,7 @@ public class GameResult {
     }
 
     private void addResult(Name name, Result result) {
-        if (name == null || result == null || results.containsKey(name)) {
+        if (name == null || result == null) {
             throw new IllegalArgumentException("이름 또는 결과가 유효하지 않습니다.");
         }
         results.put(name, result);
@@ -43,7 +45,7 @@ public class GameResult {
         return results.get(name);
     }
 
-    public Map<Name, Result> getResults() {
-        return Collections.unmodifiableMap(results);
+    public Set<Entry<Name, Result>> getResultEntries() {
+        return Collections.unmodifiableMap(results).entrySet();
     }
 }

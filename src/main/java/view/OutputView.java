@@ -56,7 +56,7 @@ public class OutputView {
 
     public static void printAllResult(GameResult gameResult) {
         System.out.println("실행 결과");
-        for (Map.Entry<Name, Result> entry : gameResult.getResults().entrySet()) {
+        for (Map.Entry<Name, Result> entry : gameResult.getResultEntries()) {
             printResultEntry(entry);
         }
     }
