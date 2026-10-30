@@ -1,5 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import domain.Connection;
 import domain.Ladder;
@@ -19,9 +21,9 @@ public class LadderTest {
         ));
         Ladder ladder = new Ladder(List.of(line));
 
-        assertEquals(Connection.CONNECTED, ladder.isConnected(0, 0));
-        assertEquals(Connection.DISCONNECTED, ladder.isConnected(0, 1));
-        assertEquals(Connection.CONNECTED, ladder.isConnected(0, 2));
+        assertTrue(ladder.isConnected(0, 0));
+        assertFalse(ladder.isConnected(0, 1));
+        assertTrue(ladder.isConnected(0, 2));
     }
 
     @Test

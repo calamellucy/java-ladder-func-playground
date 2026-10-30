@@ -1,6 +1,7 @@
 package controller;
 
 import domain.ColumnCount;
+import domain.GameResult;
 import domain.Ladder;
 import domain.LadderGame;
 import domain.LadderGenerator;
@@ -16,14 +17,39 @@ public class Controller {
     public void run() {
         List<Name> nameList = inputNameList(InputView.inputNames());
         List<Result> resultList = inputResultList(InputView.inputResults());
+        Ladder ladder = createLadder(nameList.size());
+        GameResult gameResult = createGameResult(ladder, nameList, resultList);
+        OutputView.printLadder(ladder, nameList, resultList);
+        printSelectedResult(gameResult);
+    }
 
-        ColumnCount column = new ColumnCount(nameList.size());
+    private Ladder createLadder(int nameCount) {
+        ColumnCount column = new ColumnCount(nameCount);
         RowCount row = new RowCount(InputView.inputRow());
-        Ladder ladder = new LadderGenerator().generate(row, column);
+        return new LadderGenerator().generate(row, column);
+    }
+
+    private GameResult createGameResult(Ladder ladder, List<Name> names, List<Result> results) {
         LadderGame ladderGame = new LadderGame(ladder);
-        List<Integer> gameResult = ladderGame.getResult();
-        OutputView.printLadder(ladder);
-        OutputView.printResult(gameResult);
+        List<Integer> positions = ladderGame.getResult();
+        return new GameResult(names, positions, results);
+    }
+
+    private void printSelectedResult(GameResult gameResult) {
+        boolean finished = false;
+        while (!finished) {
+            String input = InputView.inputResultName();
+            finished = processResultRequest(gameResult, input);
+        }
+    }
+
+    private boolean processResultRequest(GameResult gameResult, String input) {
+        if (input.equals("all")) {
+            OutputView.printAllResult(gameResult);
+            return true;
+        }
+        OutputView.printResult(gameResult, new Name(input));
+        return false;
     }
 
     private List<Name> inputNameList(String value) {

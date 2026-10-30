@@ -1,17 +1,36 @@
 package view;
 
 import domain.Connection;
+import domain.GameResult;
 import domain.Ladder;
 import domain.Line;
+import domain.Name;
+import domain.Result;
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
-    public static void printLadder(Ladder ladder) {
-        System.out.println("실행결과\n");
-        List<Line> lines = ladder.getLines();
-        for (Line line : lines) {
+    public static void printLadder(Ladder ladder, List<Name> names, List<Result> results) {
+        System.out.println("사다리 결과\n");
+        printNames(names);
+        for (Line line : ladder.getLines()) {
             printLine(line);
         }
+        printResults(results);
+    }
+
+    private static void printNames(List<Name> names) {
+        for (Name name : names) {
+            System.out.printf("%6s", name.getValue());
+        }
+        System.out.println();
+    }
+
+    private static void printResults(List<Result> results) {
+        for (Result result : results) {
+            System.out.printf("%6s", result.getValue());
+        }
+        System.out.println();
     }
 
     private static void printLine(Line line) {
@@ -30,10 +49,20 @@ public class OutputView {
         System.out.print("     |");
     }
 
-    public static void printResult(List<Integer> resultList) {
-        System.out.println();
-        for (int i = 0; i < resultList.size(); i++) {
-            System.out.println(i + " -> " + resultList.get(i));
+    public static void printResult(GameResult gameResult, Name name) {
+        System.out.println("실행 결과");
+        System.out.println(gameResult.findResult(name).getValue());
+    }
+
+    public static void printAllResult(GameResult gameResult) {
+        System.out.println("실행 결과");
+        for (Map.Entry<Name, Result> entry : gameResult.getResults().entrySet()) {
+            printResultEntry(entry);
         }
     }
+
+    private static void printResultEntry(Map.Entry<Name, Result> entry) {
+        System.out.println(entry.getKey().getValue() + " : " + entry.getValue().getValue());
+    }
+
 }
