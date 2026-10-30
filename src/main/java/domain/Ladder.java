@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Ladder {
     public static final int MIN_COLUMN_COUNT = 2;
@@ -21,7 +22,7 @@ public class Ladder {
     }
 
     private void validateNullLines(List<Line> lines) {
-        if (lines.contains(null)) {
+        if (lines.stream().anyMatch(Objects::isNull)) {
             throw new IllegalArgumentException("사다리에 null인 Line이 포함될 수 없습니다.");
         }
     }

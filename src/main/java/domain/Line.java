@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Line {
     private final List<Connection> points;
@@ -19,7 +20,7 @@ public class Line {
     }
 
     private void validateNullPoints(List<Connection> points) {
-        if (points.contains(null)) {
+        if (points.stream().anyMatch(Objects::isNull)) {
             throw new IllegalArgumentException("연결 상태에 null이 포함될 수 없습니다.");
         }
     }
