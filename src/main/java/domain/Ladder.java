@@ -1,25 +1,41 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Ladder {
-    private static final int MIN_ROW_COUNT = 1;
     public static final int MIN_COLUMN_COUNT = 2;
 
     private final List<Line> lines;
-    private final int column;
 
-    public Ladder(List<Line> lines, int column) {
-        validateSize(lines.size(), column);
+    public Ladder(List<Line> lines) {
+        validateLines(lines);
         this.lines = List.copyOf(lines);
-        this.column = column;
     }
 
-    private void validateSize(int row, int column) {
-        if (row < MIN_ROW_COUNT || column < MIN_COLUMN_COUNT) {
-            throw new IllegalArgumentException("행은 " + MIN_ROW_COUNT
-                    + " 이상, 열은 " + MIN_COLUMN_COUNT + " 이상이어야 합니다.");
+    private void validateLines(List<Line> lines) {
+        if (lines == null || lines.isEmpty()) {
+            throw new IllegalArgumentException("사다리는 최소 1개 이상의 행이 필요합니다.");
+        }
+        validateNullLines(lines);
+        validateLineSizes(lines);
+    }
+
+    private void validateNullLines(List<Line> lines) {
+        if (lines.contains(null)) {
+            throw new IllegalArgumentException("사다리에 null인 Line이 포함될 수 없습니다.");
+        }
+    }
+
+    private void validateLineSizes(List<Line> lines) {
+        int pointCount = lines.get(0).getPoints().size();
+        for (Line line : lines) {
+            validateLineSize(line, pointCount);
+        }
+    }
+
+    private void validateLineSize(Line line, int pointCount) {
+        if (line.getPoints().size() != pointCount) {
+            throw new IllegalArgumentException("모든 Line의 연결 위치 개수는 같아야 합니다.");
         }
     }
 
@@ -32,7 +48,7 @@ public class Ladder {
     }
 
     public int getColumn() {
-        return column;
+        return lines.get(0).getPoints().size() + 1;
     }
 
     public Connection isConnected(int row, int column) {

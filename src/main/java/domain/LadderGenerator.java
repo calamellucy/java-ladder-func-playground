@@ -7,12 +7,12 @@ import java.util.Random;
 public class LadderGenerator {
     private static final Random RANDOM = new Random();
 
-    public Ladder generate(int row, int column) {
+    public Ladder generate(RowCount row, ColumnCount column) {
         List<Line> lines = new ArrayList<>();
-        for (int i = 0; i < row; i++) {
-            lines.add(new Line(initializePoints(column - 1)));
+        for (int i = 0; i < row.getValue(); i++) {
+            lines.add(new Line(initializePoints(column.getValue() - 1)));
         }
-        return new Ladder(lines, column);
+        return new Ladder(lines);
     }
 
     private List<Connection> initializePoints(int count) {

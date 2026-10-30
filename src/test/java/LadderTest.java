@@ -16,7 +16,7 @@ public class LadderTest {
                 Connection.DISCONNECTED,
                 Connection.CONNECTED
         ));
-        Ladder ladder = new Ladder(List.of(line), 4);
+        Ladder ladder = new Ladder(List.of(line));
 
         assertEquals(Connection.CONNECTED, ladder.isConnected(0, 0));
         assertEquals(Connection.DISCONNECTED, ladder.isConnected(0, 1));
@@ -28,13 +28,13 @@ public class LadderTest {
         Line line = new Line(List.of(Connection.DISCONNECTED));
 
         assertThrows(IllegalArgumentException.class,
-                () -> new Ladder(List.of(), 4));
+                () -> new Ladder(List.of()));
         assertThrows(IllegalArgumentException.class,
-                () -> new Ladder(List.of(line), 0));
+                () -> new Ladder(List.of(line)));
         assertThrows(IllegalArgumentException.class,
-                () -> new Ladder(List.of(line), 1));
+                () -> new Ladder(List.of(line)));
         assertThrows(IllegalArgumentException.class,
-                () -> new Ladder(List.of(line), -1));
+                () -> new Ladder(List.of(line)));
     }
 
 }
