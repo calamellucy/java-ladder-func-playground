@@ -1,0 +1,48 @@
+package domain;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+public class GameResult {
+    private final Map<Name, Result> results;
+
+    public GameResult(List<Name> nameList, List<Integer> intGameResult, List<Result> gameResult) {
+        validateSize(nameList, intGameResult, gameResult);
+        results = new LinkedHashMap<>();
+        initializeResults(nameList, intGameResult, gameResult);
+    }
+
+    private void validateSize(List<Name> names, List<Integer> positions, List<Result> results) {
+        if (names == null || positions == null || results == null) {
+            throw new IllegalArgumentException("결과 목록은 null일 수 없습니다.");
+        }
+        if (names.size() != positions.size() || names.size() != results.size()) {
+            throw new IllegalArgumentException("이름과 결과의 개수가 일치해야 합니다.");
+        }
+    }
+
+    private void initializeResults(List<Name> names, List<Integer> positions, List<Result> results) {
+        for (int index = 0; index < names.size(); index++) {
+            addResult(names.get(index), results.get(positions.get(index)));
+        }
+    }
+
+    private void addResult(Name name, Result result) {
+        if (name == null || result == null || results.containsKey(name)) {
+            throw new IllegalArgumentException("이름 또는 결과가 유효하지 않습니다.");
+        }
+        results.put(name, result);
+    }
+
+    public Result findResult(Name name) {
+        if (!results.containsKey(name)) {
+            throw new IllegalArgumentException("존재하지 않는 참여자입니다.");
+        }
+        return results.get(name);
+    }
+
+    public Map<Name, Result> getResults() {
+        return Map.copyOf(results);
+    }
+}

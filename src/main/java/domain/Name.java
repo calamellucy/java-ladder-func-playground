@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Objects;
+
 public class Name {
     private static final int MAX_NAME_LENGTH = 5;
 
@@ -17,5 +19,26 @@ public class Name {
         if (value.isBlank()) {
             throw new IllegalArgumentException("이름을 공백으로 생성할 수 없습니다.");
         }
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof Name)) {
+            return false;
+        }
+        Name other = (Name) object;
+        return name.equals(other.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
+    public String getValue() {
+        return name;
     }
 }
