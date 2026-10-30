@@ -1,42 +1,40 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import domain.Connection;
 import domain.Ladder;
 import domain.Line;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class LadderTest {
 
     @Test
-    void 행_개수만큼_라인이_생성된다() {
-        Ladder ladder = new Ladder(4, 4);
+    void 사다리의_연결_상태를_정확하게_조회한다() {
+        Line line = new Line(List.of(
+                Connection.CONNECTED,
+                Connection.DISCONNECTED,
+                Connection.CONNECTED
+        ));
+        Ladder ladder = new Ladder(List.of(line), 4);
 
-        assertEquals(4, ladder.getLines().size());
-    }
-
-    @Test
-    void 모든_라인은_올바른_개수의_연결_위치를_가진다() {
-        Ladder ladder = new Ladder(4, 4);
-
-        for (Line line : ladder.getLines()) {
-            assertEquals(3, line.getPoints().size());
-        }
+        assertEquals(Connection.CONNECTED, ladder.isConnected(0, 0));
+        assertEquals(Connection.DISCONNECTED, ladder.isConnected(0, 1));
+        assertEquals(Connection.CONNECTED, ladder.isConnected(0, 2));
     }
 
     @Test
     void 잘못된_사다리_크기는_예외가_발생한다() {
-        assertThrows(IllegalArgumentException.class, () -> new Ladder(0, 4));
-        assertThrows(IllegalArgumentException.class, () -> new Ladder(-1, 4));
-        assertThrows(IllegalArgumentException.class, () -> new Ladder(4, 0));
-        assertThrows(IllegalArgumentException.class, () -> new Ladder(4, 1));
-        assertThrows(IllegalArgumentException.class, () -> new Ladder(4, -1));
+        Line line = new Line(List.of(Connection.DISCONNECTED));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> new Ladder(List.of(), 4));
+        assertThrows(IllegalArgumentException.class,
+                () -> new Ladder(List.of(line), 0));
+        assertThrows(IllegalArgumentException.class,
+                () -> new Ladder(List.of(line), 1));
+        assertThrows(IllegalArgumentException.class,
+                () -> new Ladder(List.of(line), -1));
     }
 
-    @Test
-    void 최소_크기의_사다리는_정상적으로_생성된다() {
-        Ladder ladder = new Ladder(1, 2);
-
-        assertEquals(1, ladder.getLines().size());
-        assertEquals(1, ladder.getLines().get(0).getPoints().size());
-    }
 }

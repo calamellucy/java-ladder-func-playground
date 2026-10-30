@@ -8,18 +8,12 @@ public class Ladder {
     public static final int MIN_COLUMN_COUNT = 2;
 
     private final List<Line> lines;
-    private final int row;
     private final int column;
 
-    public Ladder(int row, int column) {
-        validateSize(row, column);
-        this.row = row;
+    public Ladder(List<Line> lines, int column) {
+        validateSize(lines.size(), column);
+        this.lines = List.copyOf(lines);
         this.column = column;
-        lines = new ArrayList<>();
-        for (int i = 0; i < row; i++) {
-            Line line = new Line(column);
-            lines.add(line);
-        }
     }
 
     private void validateSize(int row, int column) {
@@ -34,7 +28,7 @@ public class Ladder {
     }
 
     public int getRow() {
-        return row;
+        return lines.size();
     }
 
     public int getColumn() {
