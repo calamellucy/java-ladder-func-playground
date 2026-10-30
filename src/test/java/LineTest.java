@@ -24,14 +24,12 @@ public class LineTest {
 
     @Test
     void 빈_연결_목록은_예외가_발생한다() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new Line(List.of()));
+        assertThrows(IllegalArgumentException.class, () -> new Line(List.of()));
     }
 
     @Test
     void null_연결_목록은_예외가_발생한다() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new Line(null));
+        assertThrows(IllegalArgumentException.class, () -> new Line(null));
     }
 
     @Test
@@ -40,8 +38,7 @@ public class LineTest {
         points.add(Connection.CONNECTED);
         points.add(null);
 
-        assertThrows(IllegalArgumentException.class,
-                () -> new Line(points));
+        assertThrows(IllegalArgumentException.class, () -> new Line(points));
     }
 
     @Test
@@ -52,8 +49,7 @@ public class LineTest {
                 Connection.DISCONNECTED
         );
 
-        assertThrows(IllegalArgumentException.class,
-                () -> new Line(points));
+        assertThrows(IllegalArgumentException.class, () -> new Line(points));
     }
 
 }
