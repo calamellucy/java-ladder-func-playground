@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class Ladder {
-    public static final int MIN_COLUMN_COUNT = 2;
-
     private final List<Line> lines;
 
     public Ladder(List<Line> lines) {

@@ -7,7 +7,14 @@ public class LadderGame {
     private final Ladder ladder;
 
     public LadderGame(Ladder ladder) {
+        validateLadder(ladder);
         this.ladder = ladder;
+    }
+
+    private void validateLadder(Ladder ladder) {
+        if (ladder == null) {
+            throw new IllegalArgumentException("사다리는 null일 수 없습니다.");
+        }
     }
 
     public List<Integer> getResult() {
@@ -18,8 +25,7 @@ public class LadderGame {
         return resultList;
     }
 
-    public int playGame(int start) {
-        int position = start;
+    private int playGame(int position) {
         for (int row = 0; row < ladder.getRow(); row++) {
             position = move(row, position);
         }
