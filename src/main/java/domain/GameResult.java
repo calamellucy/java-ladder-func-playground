@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +44,6 @@ public class GameResult {
     }
 
     public Map<Name, Result> getResults() {
-        return Map.copyOf(results);
+        return Collections.unmodifiableMap(results);
     }
 }
