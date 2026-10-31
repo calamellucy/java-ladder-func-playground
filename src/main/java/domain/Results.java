@@ -6,9 +6,9 @@ import java.util.Objects;
 public class Results {
     private final List<Result> results;
 
-    public Results(List<Result> results, int nameCount) {
+    public Results(List<Result> results, Names names) {
         validateResults(results);
-        validateSize(results, nameCount);
+        validateSize(results, names);
         this.results = List.copyOf(results);
     }
 
@@ -25,8 +25,8 @@ public class Results {
         }
     }
 
-    private void validateSize(List<Result> results, int nameCount) {
-        if (results.size() != nameCount) {
+    private void validateSize(List<Result> results, Names names) {
+        if (results.size() != names.size()) {
             throw new IllegalArgumentException("참여자와 실행 결과의 개수가 일치해야 합니다.");
         }
     }
