@@ -26,14 +26,14 @@ public class Ladder {
     }
 
     private void validateLineSizes(List<Line> lines) {
-        int pointCount = lines.get(0).getPoints().size();
+        int pointCount = lines.get(0).size();
         for (Line line : lines) {
             validateLineSize(line, pointCount);
         }
     }
 
     private void validateLineSize(Line line, int pointCount) {
-        if (line.getPoints().size() != pointCount) {
+        if (line.size() != pointCount) {
             throw new IllegalArgumentException("모든 Line의 연결 위치 개수는 같아야 합니다.");
         }
     }
@@ -47,10 +47,10 @@ public class Ladder {
     }
 
     public int getColumn() {
-        return lines.get(0).getPoints().size() + 1;
+        return lines.get(0).size() + 1;
     }
 
     public boolean isConnected(int row, int column) {
-        return lines.get(row).getPoints().get(column).isConnected();
+        return lines.get(row).isConnectedPoint(column);
     }
 }

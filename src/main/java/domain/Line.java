@@ -41,4 +41,12 @@ public class Line {
         return points;
     }
 
+    public int size() {
+        return points.size();
+    }
+
+    public boolean isConnectedPoint(int index) {
+        return points.get(index).isConnected();
+    }
+
 }
