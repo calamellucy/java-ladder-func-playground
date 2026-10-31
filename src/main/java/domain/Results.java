@@ -6,8 +6,9 @@ import java.util.Objects;
 public class Results {
     private final List<Result> results;
 
-    public Results(List<Result> results) {
+    public Results(List<Result> results, int nameCount) {
         validateResults(results);
+        validateSize(results, nameCount);
         this.results = List.copyOf(results);
     }
 
@@ -21,6 +22,12 @@ public class Results {
     private void validateNullResults(List<Result> results) {
         if (results.stream().anyMatch(Objects::isNull)) {
             throw new IllegalArgumentException("실행 결과에 null이 포함될 수 없습니다.");
+        }
+    }
+
+    private void validateSize(List<Result> results, int nameCount) {
+        if (results.size() != nameCount) {
+            throw new IllegalArgumentException("참여자와 실행 결과의 개수가 일치해야 합니다.");
         }
     }
 

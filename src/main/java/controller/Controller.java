@@ -18,7 +18,7 @@ import view.OutputView;
 public class Controller {
     public void run() {
         Names names = new Names(inputNameList(InputView.inputNames()));
-        Results results = new Results(inputResultList(InputView.inputResults()));
+        Results results = new Results(inputResultList(InputView.inputResults()), names.size());
         Ladder ladder = createLadder(names.size());
         GameResult gameResult = createGameResult(ladder, names, results);
         OutputView.printLadder(ladder, names.getNames(), results.getResults());
